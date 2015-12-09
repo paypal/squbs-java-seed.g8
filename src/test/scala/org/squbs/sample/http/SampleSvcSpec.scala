@@ -1,8 +1,9 @@
-package org.squbs.sample
+package org.squbs.sample.http
 
-import akka.actor.{Actor, Props}
+import akka.actor.Props
 import org.scalatest.{FlatSpecLike, Matchers}
-import org.squbs.httpclient.json.Json4sJacksonNoTypeHintsProtocol
+import org.squbs.httpclient.json.JacksonProtocol
+import org.squbs.sample.app.{PingRequest, PingResponse}
 import org.squbs.testkit.TestRoute
 import spray.http.{MessageChunk, StatusCodes}
 import spray.testkit.ScalatestRouteTest
@@ -33,9 +34,9 @@ class SampleSvcSpec extends FlatSpecLike with Matchers with ScalatestRouteTest {
   }
 
   it should "handle path segment and serialization" in {
-    import Json4sJacksonNoTypeHintsProtocol._
+    implicit val unmarshaller = JacksonProtocol.jacksonUnmarshaller(classOf[PingResponse])
     Get("/hello/foo") ~> route ~> check {
-      responseAs[PingResponse] should be (PingResponse("Hello foo welcome to squbs!"))
+      responseAs[PingResponse].message should be ("Hello foo welcome to squbs!")
     }
   }
 
@@ -60,25 +61,17 @@ class SampleSvcSpec extends FlatSpecLike with Matchers with ScalatestRouteTest {
   }
 
   it should "handle post serialization and deserialization" in {
-    import Json4sJacksonNoTypeHintsProtocol._
-    Post("/hello", PingRequest("bar")) ~> route ~> check {
-      responseAs[PingResponse] should be (PingResponse("Hello bar welcome to squbs!"))
+    implicit val marshaller = JacksonProtocol.jacksonMarshaller(classOf[PingRequest])
+    implicit val unmarshaller = JacksonProtocol.jacksonUnmarshaller(classOf[PingResponse])
+    Post("/hello", new PingRequest("bar")) ~> route ~> check {
+      responseAs[PingResponse].message should be ("Hello bar welcome to squbs!")
     }
   }
 
   it should "return bad request for request with blank field" in {
-    import Json4sJacksonNoTypeHintsProtocol._
-    Post("/hello", PingRequest("")) ~> route ~> check {
+    implicit val marshaller = JacksonProtocol.jacksonMarshaller(classOf[PingRequest])
+    Post("/hello", new PingRequest("")) ~> route ~> check {
       status should be (StatusCodes.BadRequest)
     }
   }
-}
-
-/**
-  * The MockSupervisor mocks a cube supervisor and starts the target actor without starting the
-  * squbs infrastructure.
-  */
-class MockSupervisor extends Actor {
-  def receive = {case _ =>}
-  context.actorOf(Props[SampleDispatcher], "sample")
 }

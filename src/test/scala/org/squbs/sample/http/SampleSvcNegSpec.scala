@@ -1,4 +1,4 @@
-package org.squbs.sample
+package org.squbs.sample.http
 
 import org.scalatest.{FlatSpecLike, Matchers}
 import org.squbs.testkit.TestRoute
