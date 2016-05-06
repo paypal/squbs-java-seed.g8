@@ -7,8 +7,8 @@ version := "0.0.1-SNAPSHOT"
 organization in ThisBuild := "org.squbs.sample"
 
 scalaVersion := "2.11.7"
-val squbsV = "0.7.1-SNAPSHOT"
-val akkaV = "2.3.13"
+val squbsV = "0.8.0-SNAPSHOT"
+val akkaV = "2.4.2"
 val jacksonV = "2.6.3"
 
 crossPaths := false
@@ -59,3 +59,7 @@ lazy val compileScalastyle = taskKey[Unit]("compileScalastyle")
 compileScalastyle := org.scalastyle.sbt.ScalastylePlugin.scalastyle.in(Compile).toTask("").value
 
 (compile in Compile) <<= (compile in Compile) dependsOn compileScalastyle
+
+xerial.sbt.Pack.packSettings
+
+packMain := Map("run" -> "org.squbs.unicomplex.Bootstrap")
