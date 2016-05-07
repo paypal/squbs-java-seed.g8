@@ -7,8 +7,8 @@ version := "0.0.1-SNAPSHOT"
 organization in ThisBuild := "org.squbs.sample"
 
 scalaVersion := "2.11.7"
-val squbsV = "0.8.0-SNAPSHOT"
-val akkaV = "2.4.2"
+val squbsV = "0.8.0"
+val akkaV = "2.4.4"
 val jacksonV = "2.6.3"
 
 crossPaths := false
