@@ -10,4 +10,6 @@ addSbtPlugin("de.johoop" % "jacoco4sbt" % "2.1.6")
 
 addSbtPlugin("org.xerial.sbt" % "sbt-pack" % "0.7.9")
 
+addSbtPlugin("se.marcuslonnberg" % "sbt-docker" % "1.4.0")
+
 resolvers += "sonatype-releases" at "https://oss.sonatype.org/content/repositories/releases/"
