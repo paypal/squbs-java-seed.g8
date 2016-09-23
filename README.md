@@ -16,5 +16,9 @@ Getting Started
 
 6. Console URL: http://localhost:8080/adm
 
+7. `sbt docker` to create a docker image.
+
+8. `docker run -p 8080:8080 <IMAGE NAME>` to run as a docker container.
+
 Most important - have fun!
 --------------------------
