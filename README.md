@@ -5,9 +5,7 @@ Getting Started
 
 2. Start the server by using `re-start` or `run`.
 
-3. Run scoverage by `;clean;coverage;test`. This is good for Scala code.
-
-4. Run jacoco by `jacoco:cover` for Java and Scala code, but with quirks.
+3. Run jacoco by `jacoco:cover` for Java code, but with quirks.
 
 5. URLs:
    * http://localhost:8080/hello: Simple hello response
