@@ -1,15 +1,16 @@
-import de.johoop.jacoco4sbt.Thresholds
+import de.johoop.jacoco4sbt._
 
 name := "squbs-java-seed"
 
-version := "0.0.1-SNAPSHOT"
+version := "0.1.0-SNAPSHOT"
 
 organization in ThisBuild := "org.squbs.sample"
 
-scalaVersion := "2.11.7"
-val squbsV = "0.8.0"
-val akkaV = "2.4.4"
-val jacksonV = "2.6.3"
+scalaVersion := "2.11.8"
+val squbsV = "0.9.0-SNAPSHOT"
+val akkaV = "2.4.16"
+val akkaHttpV = "10.0.3"
+val jacksonV = "2.8.6"
 
 crossPaths := false
 resolvers += Resolver.sonatypeRepo("snapshots")
@@ -21,7 +22,8 @@ scalacOptions ++= Seq("-unchecked", "-deprecation", "-feature", "-encoding", "ut
 javacOptions in Compile += "-parameters" // This is needed for jackson-module-parameter-names.
 testOptions in Test += Tests.Argument(TestFrameworks.JUnit, "-v", "-a")
 testOptions in jacoco.Config += Tests.Argument(TestFrameworks.JUnit, "-v", "-a")
-// jacoco.reportFormats in jacoco.Config := Seq(HTMLReport())
+jacoco.outputDirectory in jacoco.Config := file("target/jacoco")
+jacoco.reportFormats   in jacoco.Config := Seq(XMLReport(encoding = "utf-8"), HTMLReport("utf-8"))
 
 // Jacoco instruments weird things we can't control, like synthetic methods and constructors.
 // We can only go to 95% for most things measured by Jacoco.
@@ -35,10 +37,11 @@ libraryDependencies ++= Seq(
   "ch.qos.logback" % "logback-classic" % "1.1.3",
   "org.squbs" %% "squbs-unicomplex" % squbsV,
   "org.squbs" %% "squbs-actormonitor" % squbsV,
+  "org.squbs" %% "squbs-actorregistry" % squbsV,
   "org.squbs" %% "squbs-httpclient" % squbsV,
   "org.squbs" %% "squbs-pattern" % squbsV,
   "org.squbs" %% "squbs-admin" % squbsV,
-  "org.json4s" %% "json4s-jackson" % "3.3.0",
+
   "org.scala-lang.modules" %% "scala-java8-compat" % "0.7.0",
   "com.fasterxml.jackson.core" % "jackson-core" % jacksonV,
   "com.fasterxml.jackson.core" % "jackson-annotations" % jacksonV,
@@ -46,7 +49,7 @@ libraryDependencies ++= Seq(
   "com.fasterxml.jackson.module" %% "jackson-module-scala" % jacksonV,
   "com.fasterxml.jackson.module" % "jackson-module-parameter-names" % jacksonV,
   "org.squbs" %% "squbs-testkit" % squbsV % "test",
-  "io.spray" %% "spray-testkit" % "1.3.3" % "test",
+  "com.typesafe.akka" %% "akka-http-testkit" % akkaHttpV % "test",
   "junit" % "junit" % "4.12" % "test",
   "com.novocode" % "junit-interface" % "0.11" % "test->default"
 )

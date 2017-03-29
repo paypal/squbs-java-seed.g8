@@ -1,4 +1,4 @@
-package org.squbs.sample.app;
+package org.squbs.sample;
 
 
 import akka.actor.ActorRef;
@@ -8,6 +8,8 @@ import akka.testkit.JavaTestKit;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.squbs.sample.PingRequest;
+import org.squbs.sample.PingResponse;
 import scala.concurrent.duration.Duration;
 import scala.concurrent.duration.FiniteDuration;
 
@@ -28,7 +30,7 @@ public class SampleDispatcherTest {
 
     @AfterClass
     public static void afterAll() {
-        system.shutdown();
+        system.terminate();
     }
 
     @Test

@@ -1,4 +1,4 @@
-package org.squbs.sample.app;
+package org.squbs.sample;
 
 /**
  * Ping response message. Classes representing message types are simple and should be immutable.

@@ -1,4 +1,4 @@
-package org.squbs.sample.app;
+package org.squbs.sample;
 
 import scala.concurrent.duration.FiniteDuration;
 
