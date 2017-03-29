@@ -1,9 +1,9 @@
-package org.squbs.sample.http;
+package org.squbs.sample;
 
 import akka.actor.AbstractActor;
 import akka.actor.Props;
 import akka.japi.pf.ReceiveBuilder;
-import org.squbs.sample.app.SampleDispatcher;
+import org.squbs.sample.SampleDispatcher;
 
 /**
  * The MockSupervisor mocks a cube supervisor and starts the target actor without starting the
