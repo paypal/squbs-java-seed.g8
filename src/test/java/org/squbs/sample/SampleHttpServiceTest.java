@@ -6,11 +6,11 @@ import akka.stream.ActorMaterializer;
 import akka.stream.Materializer;
 import org.junit.After;
 import org.junit.Test;
-import org.squbs.testkit.japi.AbstractCustomTestKit;
+import org.squbs.testkit.japi.CustomTestKit;
 
 import static org.junit.Assert.assertEquals;
 
-public class SampleHttpServiceTest extends AbstractCustomTestKit {
+public class SampleHttpServiceTest extends CustomTestKit {
 
     static final int TEST_TIMEOUT = 30000;
 
