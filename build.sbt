@@ -11,6 +11,7 @@ val squbsV = "0.9.0-SNAPSHOT"
 val akkaV = "2.4.16"
 val akkaHttpV = "10.0.3"
 val jacksonV = "2.8.6"
+val akkaHttpJackson = "1.11.0"
 
 crossPaths := false
 resolvers += Resolver.sonatypeRepo("snapshots")
@@ -43,6 +44,7 @@ libraryDependencies ++= Seq(
   "org.squbs" %% "squbs-admin" % squbsV,
 
   "org.scala-lang.modules" %% "scala-java8-compat" % "0.7.0",
+  "de.heikoseeberger" %% "akka-http-jackson" % akkaHttpJackson,
   "com.fasterxml.jackson.core" % "jackson-core" % jacksonV,
   "com.fasterxml.jackson.core" % "jackson-annotations" % jacksonV,
   "com.fasterxml.jackson.core" % "jackson-databind" % jacksonV,
