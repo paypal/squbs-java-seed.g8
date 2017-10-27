@@ -1,6 +1,6 @@
 object Versions {
   val akkaV = "2.5.4"
-  val akkaHttpV = "10.0.9"
+  val akkaHttpV = "10.0.10"
   val squbsV = "0.10.0-SNAPSHOT"
   val jacksonV = "2.8.6"
   val akkaHttpJacksonV = "1.17.0"
