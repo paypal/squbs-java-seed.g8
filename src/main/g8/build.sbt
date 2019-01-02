@@ -1,4 +1,3 @@
-import de.johoop.jacoco4sbt._
 
 name := "$appname;format="norm"$"
 
@@ -14,21 +13,25 @@ crossPaths := false
 resolvers += Resolver.sonatypeRepo("snapshots")
 
 Revolver.settings
-jacoco.settings
 
 scalacOptions ++= Seq("-unchecked", "-deprecation", "-feature", "-encoding", "utf8")
 javacOptions in Compile += "-parameters" // This is needed for jackson-module-parameter-names.
 testOptions in Test += Tests.Argument(TestFrameworks.JUnit, "-v", "-a")
-testOptions in jacoco.Config += Tests.Argument(TestFrameworks.JUnit, "-v", "-a")
-jacoco.outputDirectory in jacoco.Config := file("target/jacoco")
-jacoco.reportFormats   in jacoco.Config := Seq(XMLReport(encoding = "utf-8"), HTMLReport("utf-8"))
 
 // Jacoco instruments weird things we can't control, like synthetic methods and constructors.
 // We can only go to 95% for most things measured by Jacoco.
-jacoco.thresholds in jacoco.Config := Thresholds(line = 95.0, instruction = 95.0, method = 95.0, clazz = 95.0)
+jacocoReportSettings := JacocoReportSettings(
+    "Jacoco Coverage Report",
+    None,
+    JacocoThresholds(
+        instruction = 90,
+        method = 90,
+        line = 90),
+    Seq(JacocoReportFormats.ScalaHTML),
+    "utf-8")
 
 // Scoverage controls. Much cleaner here. Just Scala only.
-coverageMinimum := 100
+coverageMinimum := 90
 coverageFailOnMinimum := true
 
 libraryDependencies ++= Seq(
