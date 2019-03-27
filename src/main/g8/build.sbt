@@ -24,14 +24,14 @@ jacocoReportSettings := JacocoReportSettings(
     "Jacoco Coverage Report",
     None,
     JacocoThresholds(
-        instruction = 90,
-        method = 90,
-        line = 90),
+        instruction = 95,
+        method = 95,
+        line = 95),
     Seq(JacocoReportFormats.ScalaHTML),
     "utf-8")
 
 // Scoverage controls. Much cleaner here. Just Scala only.
-coverageMinimum := 90
+coverageMinimum := 100
 coverageFailOnMinimum := true
 
 libraryDependencies ++= Seq(
