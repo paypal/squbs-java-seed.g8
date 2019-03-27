@@ -8,7 +8,7 @@ addSbtPlugin("org.scoverage" % "sbt-scoverage" % "1.5.1")
 
 addSbtPlugin("com.github.sbt" % "sbt-jacoco" % "3.1.0")
 
-addSbtPlugin("org.xerial.sbt" % "sbt-pack" % "0.10.1")
+addSbtPlugin("org.xerial.sbt" % "sbt-pack" % "0.12")
 
 addSbtPlugin("se.marcuslonnberg" % "sbt-docker" % "1.5.0")
 
